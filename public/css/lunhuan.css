@@ -1,0 +1,160 @@
+
+#lunhuan{
+    background-color: #f3f3f3;
+    position: relative;
+    margin-top: 220px;
+    margin-bottom: 30px;
+}
+#wrapper {
+    margin: -200px 100px 10px -367px;
+    position: absolute;
+    left: 72%;
+}
+#carousel {
+    width: 735px;
+    position:relative;
+    left: -160px;
+}
+#carousel ul {
+    list-style: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+#carousel li {
+    background: transparent url(../images/carousel_polaroid.png) no-repeat 0 0;
+    font-size: 40px;
+    color: #999;
+    text-align: center;
+    display: block;
+    width: 232px;
+    height: 178px;
+    padding: 0;
+    margin: 6px;
+    float: left;
+    position: relative;
+
+}
+#carousel li img {
+    width: 201px;
+    height: 127px;
+    margin-top: 14px;
+}
+#carousel li span {
+    background: transparent url(../images/carousel_shine.png) no-repeat 0 0;
+    text-indent: -999px;
+    display: block;
+    overflow: hidden;
+    width: 201px;
+    height: 127px;
+    position: absolute;
+
+    top: 14px;
+    left: 16px;
+}
+
+
+
+.clearfix {
+
+    float: none;
+
+    clear: both;
+
+}
+
+#carousel .prev, #carousel .next {
+
+    background: transparent url(../images/carousel_control.png) no-repeat 0 0;
+
+    text-indent: -999px;
+
+    display: block;
+
+    overflow: hidden;
+
+    width: 15px;
+    height: 21px;
+    margin-left: 10px;
+    position: absolute;
+    top: 70px;
+}
+#carousel .prev {
+    background-position: 0 0;
+    left: -30px;
+}
+#carousel .prev:hover {
+    left: -31px;
+}
+#carousel .next {
+    background-position: -18px 0;
+    right: -20px;
+}
+#carousel .next:hover {
+    right: -21px;
+}
+#carousel .pagerr {
+    text-align: center;
+    margin: -10px auto 0;
+}
+#carousel .pagerr a {
+    background: transparent url(../images/carousel_control.png) no-repeat -2px -32px;
+    text-decoration: none;
+    text-indent: -999px;
+    display: inline-block;
+    overflow: hidden;
+    width: 8px;
+    height: 8px;
+    margin: 0 5px 0 0;
+}
+#carousel .pagerr a.selected {
+    background: transparent url(../images/carousel_control.png) no-repeat -12px -32px;
+    text-decoration: underline;
+}
+#source {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+}
+#source, #source a {
+    font-size: 12px;
+    color: #999;
+}
+#donate-spacer {
+    height: 100%;
+    margin-top: -10px;
+}
+
+#donate {
+
+    border-top: 1px solid #999;
+
+    width: 750px;
+
+    padding: 50px 75px;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+
+}
+
+#donate p, #donate form {
+
+    margin: 0;
+
+    float: left;
+
+}
+
+#donate p {
+    width: 650px;
+}
+
+#donate form {
+
+    width: 100px;
+
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客系列之剑网3</title>
+    <link rel="shortcut icon" href="../../public/images/tit.png" type="image/x-icon" />
+    <link href="../../public/css/main.css" rel="stylesheet" type="text/css">
+    <link href="../../public/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../../public/fontAwesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="../../public/js/jquery-1.12.4.min.js"></script>
+    <script src="../../public/js/index.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="menu">
+            <img src="../../public/images/tit.png">
+            <!--模板引擎的循环-->
+            {% for type in types %}
+            {% if type.tid == mytype %}
+            <a href="/?mytype={{type.tid}}" class="active">{{type.tname}}</a>
+            {%else%}
+            <a href="/?mytype={{type.tid}}">{{type.tname}}</a>
+            {%endif%}
+            {%endfor%}
+        </div>
+    </nav>
+
+    <main class="clear">
+        <div class="mainLeft">
+            <div class="rightBox mylogo">
+                <div class="logo">
+                    <a href="#"><span>剑网3</span></a>
+                </div>
+            </div>
+            {% if userInfo.uid %}
+            <div class="rightBox" id="userInfo" >
+                <div class="title"><span class="glyphicon glyphicon-user"> 个人资料</span></div>
+                <div class="bbox">
+                    <p class="userName">昵称：<span class="colDark">{{userInfo.uname}}</span></p>
+                    <p class="userName">签名：<span class="colDark">{{userInfo.myshow}}</span></p>
+                </div>
+
+                <!--判断是否是管理员-->
+                {% if userInfo.isAdmin==1 %}
+                <div class="line">
+                    <p class="adminInfo">
+                    <p class="colDanger" >您好，管理员！</p>
+                    <a href="/admin" id="guanli">→进入管理界面</a>
+                    </p>
+                </div>
+                {%else%}
+                <div class="line"><p><span class="colDanger">你好，欢迎光临我的博客！</span></p></div>
+                {%endif%}
+                <div class="line"><span class="colDark"><a href="javascript:void (0);" id="logout"><button class="but">退出</button></a></span></div>
+            </div>
+            {%else%}
+            <div class="rightBox" id="loginBox">
+                <div class="title"><span class="glyphicon glyphicon-user">登录</span></div>
+                <div class="line"><span class="colDark">用户名：</span><input name="username" type="text" placeholder="邮箱/会员账号/手机号"/><em></em></div>
+                <div class="line"><span class="colDark">密&nbsp;&nbsp;&nbsp;&nbsp;码：</span><input name="password" type="password" placeholder="请输入密码"/><em></em></div>
+                <div class="line">
+                    <div class="checkbox" style="font-size: 12px">
+                        <label>
+                            <input type="checkbox"> 记住我
+                        </label>
+                        <a href="" style="margin-left: 110px;color: #2B2B2B">忘记密码</a>
+                    </div>
+
+                </div>
+                <div class="line"><span class="colDark"></span><button>登 录</button></div>
+                <p class="textRight">还没注册？<a href="javascript:;" class="colMint">马上注册</a>　</p>
+                <p class="colWarning textCenter"></p>
+            </div>
+            <div class="rightBox" id="registerBox" style="display:none">
+                <div class="title"><span>注册</span></div>
+                <div class="line"><span class="colDark">用户名：</span><input name="username" type="text" id="zcuname"/></div>
+                <div class="line"><span class="colDark">密&nbsp;码：</span><input name="password" type="password" id="zcpwd"/></div>
+                <div class="line"><span class="colDark">确认：</span><input name="repassword" type="password" id="zcpwdagain"/></div>
+                <div class="line"><span class="colDark"></span><button>注 册</button></div>
+                <p class="textRight">已有账号？<a href="javascript:;" class="colMint">马上登录</a>　</p>
+                <p class="colWarning textCenter"></p>
+            </div>
+            {%endif%}
+
+            <div class="rightBox shequ art">
+                <div class="title"><span class="glyphicon glyphicon-list"> 查看历史</span></div>
+                {%for content in contents%}
+                <div class="listBox">
+                    <div class="functionn">
+                        <span class="list_titt"><a href="/view?cid={{content.cid}}">☺ 《{{content.title}}》</a></span>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+
+            <div class="rightBox">
+                <div class="title"><span class="glyphicon glyphicon-home"> 社区</span></div>
+                <div class="guanzhu" id="follow-us">
+                    <ul>
+                        <li class="sina"><a href="/" target="_blank"><span class="gz">新浪微博</span>剑网3官方微博</a></li>
+                        <li class="tencent"><a href="/" target="_blank"><span class="gz">腾讯微博</span>剑网3游戏</a></li>
+                        <li class="qq"><a href="/" target="_blank"><span class="gz">QQ号</span>2222009828</a></li>
+                        <li class="email"><a href="/" target="_blank"><span class="gz">邮箱帐号</span>dancesmiling@qq.com</a></li>
+                        <li class="wxgzh"><a href="/" target="_blank"><span class="gz">微信公众号</span>剑网3</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mainRight">
+            <div class="listBox">
+                <h2 class="list_tit"><a href="#">{{content.title}}</a></h2>
+                <p class="colDefault">
+                    <i class="fa fa-user" aria-hidden="true"></i> <span class="colInfo">{{content.uname}}</span>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i> <span class="colInfo">{{content.addTime |date('Y年m月d日 H:i:s')}}</span>
+                    <i class="fa fa-eye" aria-hidden="true"></i> <span class="colInfo">{{content.views}}</span>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span class="colInfo">
+                {%if content.comments%}
+                    {{content.comments}}
+                {%else%}
+                    0
+                {%endif%}
+                </span>
+                </p>
+                <dfn><p class="qw">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{content.content}}</p></dfn>
+            </div>
+
+            <div class="listBox message">
+                <h3 class="textLeft"><span class="glyphicon glyphicon-edit edit"></span>  <strong>评论:</strong> <span class="em">一共有 <em id="messageCount">0</em> 条评论</span></h3>
+
+                {%if userInfo.uid%}
+                <p class="textLeft">{{userInfo.uname}}</p>
+                <p class="textLeft clear">
+                    <textarea id="messageContent"></textarea>
+                    <input type="hidden" id="contentId" value="{{content.cid}}" />
+                    <button id="messageBtn" class="submit">提交</button>
+                </p>
+                {%else%}
+                <p class="bgDanger" style="line-height:30px;margin-top: 20px">你还没有登录，请先登录</p>
+                {%endif%}
+
+                <div class="messageList">
+                    <div class="messageBox">
+                        <p class="name clear">
+                            <span class="f1">评论人:</span>
+                            <span class="fr" style="font-size: 12px">2018年8月20日 16:25:30</span>
+                        </p>
+                        <p style="margin-left: 40px">这个文章写的不错</p>
+                    </div>
+                    <div class="messageBox">
+                        <p class="name clear">
+                            <span class="f1">评论人:</span>
+                            <span class="fr" style="font-size: 12px">2018年8月20日 16:25:30</span>
+                        </p>
+                        <p style="margin-left: 40px">这个文章写的不错</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </main>
+
+    <div class="copyright textCenter">Copyright © ycinfo 版权所有 | 京ICP备xxxx号</div>
+
+
+</body>
+</html>

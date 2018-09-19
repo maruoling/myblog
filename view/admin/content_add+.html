@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+
+<ol class="breadcrumb">
+    <li><a href="/">管理首页</a></li>
+    <li><span>内容添加</span></li>
+</ol>
+
+<h3>内容添加</h3>
+
+<form role="form" method="post">
+
+    <div class="form-group">
+        <label for="title">分类：</label>
+        <select name="category" id="category" class="form-control">
+            {%for type in types%}
+            <option value="{{type.tid}}">{{type.tname}}</option>
+            {%endfor%}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="title">标题：</label>
+        <input type="text" class="form-control" id="title" placeholder="请输入内容标题" name="title">
+    </div>
+
+    <div class="form-group">
+        <label for="description">简介：</label>
+        <textarea name="description" id="description" class="form-control" rows="5" placeholder="请输入内容简介"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="content">内容：</label>
+        <textarea name="content" id="content" class="form-control" rows="10" placeholder="请输入内容"></textarea>
+    </div>
+
+    <div class="pic" style="width: 500px;height:200px;border: 2px solid red">
+        <form method="post" enctype="multipart/form-data" style="float:left;">
+            <ul>
+                <li><label for="pwd">图&nbsp;&nbsp;&nbsp;像：</label>
+                    <!--  作为文件域(<input type="file">)必须要有name属性，如果没有name属性，上传之后服务器是获取不到图片的  -->
+                    <input type="file" name="photo" id="photo" onchange="previewMultipleImage(this,'news_pic_show')"/></li>
+            </ul>
+            <div style="float:left;width:201px;height:127px;margin-left:250px;margin-top: -50px">
+                <fieldset id="news_pic_show">
+                    <legend>图片预览</legend>
+                    <img src=""  width="201px" height="127px"/>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary" style="margin-left: 50px">提交</button>
+    <br /><br />
+</form>
+
+<script>
+    function previewMultipleImage() {
+        var preview=document.querySelector("#news_pic_show img");
+        var file=document.querySelector("input[type=file]").files[0];
+        var reader=new FileReader();
+        reader.addEventListener("load",function () {
+            preview.src=reader.result;
+        },false);
+        if(file){
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+{% endblock %}
